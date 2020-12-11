@@ -63,7 +63,7 @@ Country.prototype.time = function(h3){
     }else if(timeOp === '-'){
         if(clock.getUTCHours()-parseInt(timeNum) < 0){
             return h3.innerText = `The time in ${this.name} is 
-            ${24-parseInt(timeNum)}:${clock.getMinutes()}`;
+            ${24-parseInt(timeNum)}:${clock.getMinutes()}`; // utgår från 24 som i klockan 12 och subtraherar utc tiden från det istället.
         }else{
             return h3.innerText = `The time in ${this.name} is
             ${clock.getUTCHours()-parseInt(timeNum)}:${clock.getMinutes()}`;
