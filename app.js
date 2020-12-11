@@ -33,7 +33,7 @@ fetch(url)
 
     // for loop som anropar instans metoden i varje instans.
     for(let i=0; i<allH3.length;i++){
-        countries[i].time(allH3[i]);
+            countries[i].time(allH3[i]);
     }
 
 })
@@ -47,17 +47,29 @@ function Country(name, flag, timezones){
 
 // Instans metoden för min constructor
 Country.prototype.time = function(h3){
+    
     let clock = new Date();
-
+    
+    // variabel med landets utctimme i string
     let timeNum = this.timezones[0].substr(4,2);
+    // Landets tidszons negativa eller positiva operator
     let timeOp = this.timezones[0].substr(3,1);
     console.log(timeOp);
 
+    // If sats för att avgöra vilket resultat som returneras beroende på operatorn.
     if(timeOp === '+'){
-        return h3.innerText = `The time in ${this.name} is ${clock.getUTCHours()+parseInt(timeNum)}:${clock.getMinutes()}`;
+        return h3.innerText = `The time in ${this.name} is 
+        ${clock.getUTCHours()+parseInt(timeNum)} : ${clock.getMinutes()}`;// Parseint för att omvandla stringen till ett nummer.
     }else if(timeOp === '-'){
-        return h3.innerText = `The time in ${this.name} is ${clock.getUTCHours()-parseInt(timeNum)}:${clock.getMinutes()}`;
+        if(clock.getUTCHours()-parseInt(timeNum) < 0){
+            return h3.innerText = `The time in ${this.name} is 
+            ${24-parseInt(timeNum)}:${clock.getMinutes()}`;
+        }else{
+            return h3.innerText = `The time in ${this.name} is
+            ${clock.getUTCHours()-parseInt(timeNum)}:${clock.getMinutes()}`;
+        }
     }else{
-        return h3.innerText = `The time in ${this.name} is ${clock.getUTCHours()}:${clock.getMinutes()}`;
+        return h3.innerText = `The time in ${this.name} is 
+        ${clock.getUTCHours()}:${clock.getMinutes()}`;
     }
 }
